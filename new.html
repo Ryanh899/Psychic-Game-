@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Psychic Game</h1>
+    <p>Guess what letter I am thinking of</p>
+    <div id="letter"></div>
+    <div id="win">Wins: 0</div>
+    <div id="losses">Losses: 0</div>
+    <script type="text/javascript">
+        //computer needs to pick a random letter 
+        var letterString = "abcdefghijklmnopqrstuvwxyz"; 
+        var letterArr = []; 
+        var wins = 0; 
+        var losses = 0; 
+        //make split arr out of string 
+        var split = function(arr, string) {
+            var value = string.split(''); 
+            arr.push(value); 
+            console.log(arr)
+        }
+        split(letterArr, letterString)
+        var letter = letterArr[0]; 
+        console.log(letterArr[0]); 
+//pick random letter 
+        var pick = function(arr){
+            var item = arr[Math.floor(Math.random()*arr.length)];
+            console.log(item); 
+            return item
+        }
+        var computerChoice = pick(letter)
+        console.log(computerChoice); 
+//user input 
+        document.onkeyup = function(e) {
+            var userInput = e.key; 
+            var gameOver = true
+            if (userInput === computerChoice) {
+                alert("you win"); 
+                wins++ ; 
+                $('#win').text(`Wins: ${wins}`); 
+                gameOver = false
+            }
+            else {
+                alert('you lose'); 
+                losses++ ; 
+                $('#losses').text(`Losses: ${losses}`)
+            }
+            if (!gameOver) {
+                computerChoice = pick(letter)
+            }
+        }
+        
+        </script>
+</body>
+</html>
